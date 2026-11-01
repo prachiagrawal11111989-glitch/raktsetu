@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RaktSetu - Find blood donors near you</title><meta name="description" content="Verified blood donors by blood group and distance. Register once, help when it matters.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 29'%3E%3Cpath d='M11 1C11 1 1 12.5 1 19a10 10 0 0020 0C21 12.5 11 1 11 1z' fill='%23d62839'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hind:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#251a17;--red:#d62839;--redd:#a8182a;--blush:#fdebe7;--sun:#ffc145;--leaf:#1d7a57;--mute:#6b5d58;--line:#eadfd9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:#fff;font:17px/1.6 Hind,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:"Bricolage Grotesque",Hind,sans-serif;line-height:1.05;margin:0}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+header.top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 22px;max-width:1120px;margin:0 auto;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:25px;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{padding:8px 15px;border-radius:99px;text-decoration:none;color:var(--ink);font-weight:600;transition:background .2s}
+nav a:hover{background:var(--blush)}
+nav a.cta{background:var(--red);color:#fff}nav a.cta:hover{background:var(--redd)}
+nav a[aria-current]{background:var(--ink);color:#fff}
+.btn{display:inline-block;padding:13px 26px;border-radius:99px;border:2px solid var(--red);background:var(--red);color:#fff;font:600 17px Hind,sans-serif;cursor:pointer;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.btn.light{background:#fff;color:var(--red);border-color:#fff}
+.btn.ghost{background:transparent;color:#fff;border-color:#fff}
+.btn.ink{background:var(--ink);border-color:var(--ink)}
+.btn.alt{background:#fff;color:var(--ink);border-color:var(--ink)}
+/* motion */
+.ln{display:block;overflow:hidden;padding-bottom:.1em}
+.ln>span{display:block;transform:translateY(112%);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes up{to{transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.fade{animation:fade .9s both;animation-delay:var(--d,0s)}
+/* hero */
+.hero{background:var(--red);color:#fff;overflow:hidden}
+.hero .w{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;min-height:calc(100vh - 66px);padding-top:40px;padding-bottom:40px}
+.hero h1{font-size:clamp(40px,5.4vw,70px);font-weight:800;letter-spacing:-.025em}
+.hero em{font-style:normal;color:var(--sun);white-space:nowrap}
+.hero p{font-size:20px;max-width:29em;margin:24px 0 30px;color:#ffe6e2}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+.hero small{display:block;margin-top:22px;color:#ffd0ca}
+.art{width:100%;max-width:470px;justify-self:center;overflow:visible}
+.rg{fill:none;stroke:#fff;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ring 4s ease-out infinite backwards;animation-delay:var(--d)}
+@keyframes ring{from{transform:scale(.45);opacity:.7}to{transform:scale(1.1);opacity:0}}
+.fl{animation:fl 5s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes fl{50%{transform:translateY(-14px)}}
+.dr{transform-box:fill-box;transform-origin:center;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.045)}}
+.ecg{fill:none;stroke:var(--red);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;animation:ecg 2.8s ease-in-out infinite}
+@keyframes ecg{0%{stroke-dashoffset:100}60%,100%{stroke-dashoffset:0}}
+.pin{transform-box:fill-box;transform-origin:bottom center;animation:pop 4.5s infinite backwards;animation-delay:var(--d)}
+@keyframes pop{0%,12%{transform:scale(0)}22%,86%{transform:scale(1)}100%{transform:scale(1);opacity:0}}
+.mq{background:var(--ink);color:var(--sun);overflow:hidden;white-space:nowrap;padding:14px 0;font:800 30px "Bricolage Grotesque",sans-serif}
+.mq div{display:inline-block;animation:mq 26s linear infinite}
+.mq span{margin:0 28px}.mq i{font-style:normal;color:var(--red)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+.sec{padding:88px 0}
+.sec h2{font-size:clamp(32px,4.6vw,56px);font-weight:800;letter-spacing:-.02em;max-width:15em}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.st{padding:30px;border-radius:24px}
+.st:nth-child(1){background:var(--blush)}.st:nth-child(2){background:#fff1cf;margin-top:30px}.st:nth-child(3){background:#dcf0e6;margin-top:60px}
+.st svg{width:58px;height:58px;display:block;margin-bottom:16px}
+.st h3{font-size:25px;margin-bottom:8px}.st p{margin:0;color:var(--mute)}
+.trust{background:var(--blush)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.ck{list-style:none;padding:0;margin:30px 0 0}
+.ck li{display:flex;gap:14px;padding:16px 0;border-top:2px solid #f3c9c2}
+.ck li:first-child{border-top:0}
+.ck svg{flex:none;width:28px;height:28px;margin-top:3px}
+.ck b{display:block;font-size:19px}.ck span{color:var(--mute)}
+.band{background:var(--sun);text-align:center}
+.band h2{margin:0 auto 28px;max-width:14em}
+footer{background:var(--ink);color:#d9cbc5;padding:54px 0 34px}
+footer .logo{color:#fff;margin-bottom:12px}
+footer .fg{display:grid;grid-template-columns:1.4fr 1fr;gap:30px}
+footer a{color:#fff;display:block;text-decoration:none;padding:3px 0}footer a:hover{color:var(--sun)}
+footer small{display:block;margin-top:30px;color:#a79891;border-top:1px solid #4a3b36;padding-top:18px}
+/* inner pages */
+.ph{padding:60px 0 50px}
+.ph h1{font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.02em}
+.ph p{max-width:34em;margin:14px 0 0;font-size:19px}
+.ph.blush{background:var(--blush)}.ph.sun{background:var(--sun)}.ph.ink{background:var(--ink);color:#fff}.ph.ink p{color:#e5d8d2}
+.page{padding:44px 0 80px}
+.panel{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:28px;box-shadow:7px 7px 0 var(--ink)}
+.panel h2{font-size:30px;margin-bottom:6px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.side{padding:6px 4px}.side h3{font-size:24px;margin-bottom:10px}.side p,.side li{color:var(--mute)}.side ul{padding-left:20px}
+/* forms and results */
+label{display:block;font-weight:600;font-size:15px;margin-bottom:5px}
+input,select{width:100%;padding:13px 14px;border:2px solid #cdbfb8;border-radius:12px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus{border-color:var(--red);outline:0}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0 20px}
+.tiles button{padding:15px 0;font:800 26px "Bricolage Grotesque",sans-serif;border:2px solid var(--ink);background:#fff;border-radius:14px;cursor:pointer;color:var(--ink);transition:transform .15s,background .15s}
+.tiles button:hover{background:var(--blush)}
+.tiles button[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 5px 0 var(--redd)}
+.f{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}.f>div{flex:1 1 220px}
+.opt{margin-top:14px;display:flex;gap:10px;align-items:center;color:var(--mute);font-size:15px}.opt input{width:auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.res{margin-top:22px}
+.row{display:grid;grid-template-columns:60px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-top:2px dashed var(--line);animation:fade .6s both}
+.grp{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:800 20px "Bricolage Grotesque",sans-serif}
+.nm{font-weight:600;font-size:18px}.sm{color:var(--mute);font-size:15px}
+.pill{font-size:13px;background:#dcf0e6;color:var(--leaf);padding:2px 10px;border-radius:99px;margin-left:8px;font-weight:600}
+.note{padding:22px 0;color:var(--mute)}
+.msg{margin-top:14px;padding:13px 16px;border-radius:12px}.msg.ok{background:#dcf0e6;color:var(--leaf)}.msg.err{background:var(--blush);color:var(--redd)}
+.hide{display:none}
+ol.b{list-style:none;margin:14px 0 0;padding:0}
+ol.b li{display:flex;gap:14px;align-items:center;padding:13px 0;border-top:2px dashed var(--line);animation:fade .6s both}
+.rk{font:800 30px "Bricolage Grotesque",sans-serif;width:38px;color:#c9bab3}
+ol.b li:nth-child(1) .rk{color:var(--red)}ol.b li:nth-child(2) .rk{color:#e8892b}ol.b li:nth-child(3) .rk{color:var(--leaf)}
+.ct{margin-left:auto;font:800 24px "Bricolage Grotesque",sans-serif}
+@media(max-width:820px){.hero .w,.two,.cols,.steps,footer .fg,.grid2{grid-template-columns:1fr}.hero .w{min-height:0}.art{max-width:340px}.st:nth-child(n){margin-top:0}.row{grid-template-columns:56px 1fr}.row .act{grid-column:1/-1}.sec{padding:60px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ln>span{transform:none}.js .rv{opacity:1;transform:none}.pin{transform:none}}
+</style><script>document.documentElement.className="js";document.addEventListener("DOMContentLoaded",function(){var n=document.querySelectorAll(".rv");if(!("IntersectionObserver" in window)){n.forEach(function(e){e.classList.add("in")});return}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");o.unobserve(e.target)}})},{threshold:.12});n.forEach(function(e){o.observe(e)});setTimeout(function(){n.forEach(function(e){e.classList.add("in")})},5000)})</script></head><body>
+<header class="top"><div class="bar"><a class="logo" href="index.html"><svg width="22" height="29" viewBox="0 0 22 29" aria-hidden="true"><path d="M11 1C11 1 1 12.5 1 19a10 10 0 0020 0C21 12.5 11 1 11 1z" fill="#d62839"/></svg>RaktSetu</a><nav><a href="index.html" aria-current="page">Home</a><a href="find.html" class="cta">Find blood</a><a href="donate.html">Become a donor</a><a href="leaderboard.html">Top donors</a></nav></div></header>
+<script>if(location.search.indexOf("manage=")>-1)location.replace("donate.html"+location.search)</script>
+<section class="hero"><div class="w"><div>
+<h1><span class="ln"><span style="--d:.05s">Need blood?</span></span><span class="ln"><span style="--d:.2s">Someone <em>near you</em></span></span><span class="ln"><span style="--d:.35s">can give it.</span></span></h1>
+<p class="fade" style="--d:.7s">RaktSetu lists verified donors by blood group and shows the closest one first, so families stop waiting on forwarded messages.</p>
+<div class="acts fade" style="--d:.9s"><a class="btn light" href="find.html">Find a donor</a><a class="btn ghost" href="donate.html">Become a donor</a></div>
+<small class="fade" style="--d:1.1s">Free to use. Nothing to install.</small></div>
+<svg class="art" viewBox="0 0 400 420" role="img" aria-label="A blood drop with a heartbeat line"><circle class="rg" cx="200" cy="235" r="170" style="--d:0s"/><circle class="rg" cx="200" cy="235" r="170" style="--d:1.3s"/><circle class="rg" cx="200" cy="235" r="170" style="--d:2.6s"/>
+<g class="dr"><path d="M200 55C200 55 100 170 100 250a100 100 0 00200 0C300 170 200 55 200 55z" fill="#fff"/><path class="ecg" pathLength="100" d="M128 262h42l14-40 22 82 20-60 12 18h62"/></g>
+<g class="fl" style="--d:0s"><rect x="28" y="92" width="76" height="46" rx="23" fill="#ffc145"/><text x="66" y="123" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="24" fill="#251a17">O-</text></g>
+<g class="fl" style="--d:1.2s"><rect x="296" y="150" width="76" height="46" rx="23" fill="#251a17"/><text x="334" y="181" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="24" fill="#fff">B+</text></g>
+<g class="fl" style="--d:2.2s"><rect x="40" y="318" width="76" height="46" rx="23" fill="#fff"/><text x="78" y="349" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="24" fill="#d62839">A+</text></g>
+<g class="fl" style="--d:3.1s"><rect x="290" y="332" width="84" height="46" rx="23" fill="#ffc145"/><text x="332" y="363" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="24" fill="#251a17">AB-</text></g></svg></div></section>
+<div class="mq" aria-hidden="true"><div><span>O+</span><span><i>&#9679;</i></span><span>A+</span><span><i>&#9679;</i></span><span>B+</span><span><i>&#9679;</i></span><span>AB+</span><span><i>&#9679;</i></span><span>O-</span><span><i>&#9679;</i></span><span>A-</span><span><i>&#9679;</i></span><span>B-</span><span><i>&#9679;</i></span><span>AB-</span><span><i>&#9679;</i></span><span>O+</span><span><i>&#9679;</i></span><span>A+</span><span><i>&#9679;</i></span><span>B+</span><span><i>&#9679;</i></span><span>AB+</span><span><i>&#9679;</i></span><span>O-</span><span><i>&#9679;</i></span><span>A-</span><span><i>&#9679;</i></span><span>B-</span><span><i>&#9679;</i></span><span>AB-</span><span><i>&#9679;</i></span></div></div>
+<section class="sec"><div class="w"><h2 class="rv">From a worried search to a phone call in three steps.</h2>
+<div class="steps">
+<div class="st rv"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="24" cy="24" r="14" fill="none" stroke="#d62839" stroke-width="5"/><path d="M35 35l14 14" stroke="#d62839" stroke-width="5" stroke-linecap="round"/></svg><h3>Pick the blood group</h3><p>Choose what the patient needs. Compatible groups are included, so an O- donor shows up for everyone.</p></div>
+<div class="st rv" style="--d:.15s"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 4C19 4 12 11 12 20c0 12 16 32 16 32s16-20 16-32C44 11 37 4 28 4z" fill="#e0a000"/><circle cx="28" cy="20" r="6" fill="#fff"/></svg><h3>See who is nearest</h3><p>Allow your location and the list sorts itself by distance, with kilometres shown next to each name.</p></div>
+<div class="st rv" style="--d:.3s"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M14 8h10l4 12-6 4a30 30 0 0010 10l4-6 12 4v10a6 6 0 01-6 6C24 48 8 32 8 14a6 6 0 016-6z" fill="#1d7a57"/></svg><h3>Call or WhatsApp</h3><p>Tap Contact to reveal the number. Phone numbers stay hidden until you actually need them.</p></div>
+</div></div></section>
+<section class="sec trust"><div class="w two"><svg class="rv" viewBox="0 0 400 400" role="img" aria-label="Donors appearing on a map at increasing distance" style="width:100%;max-width:460px;justify-self:center"><circle class="rg" style="stroke:#d62839;--d:0s" cx="200" cy="200" r="180"/><circle class="rg" style="stroke:#d62839;--d:1.5s" cx="200" cy="200" r="180"/>
+<circle cx="200" cy="200" r="60" fill="none" stroke="#f3c9c2" stroke-width="2" stroke-dasharray="6 8"/><circle cx="200" cy="200" r="120" fill="none" stroke="#f3c9c2" stroke-width="2" stroke-dasharray="6 8"/><circle cx="200" cy="200" r="180" fill="none" stroke="#f3c9c2" stroke-width="2" stroke-dasharray="6 8"/>
+<circle cx="200" cy="200" r="11" fill="#251a17"/><text x="200" y="232" text-anchor="middle" font-family="Hind,sans-serif" font-size="15" font-weight="600" fill="#251a17">you</text>
+<g class="pin" style="--d:.3s"><path d="M244 150c0 0-14 16-14 25a14 14 0 0028 0c0-9-14-25-14-25z" fill="#d62839"/><text x="266" y="182" font-family="Hind,sans-serif" font-size="15" font-weight="600" fill="#251a17">0.8 km</text></g>
+<g class="pin" style="--d:.9s"><path d="M120 246c0 0-14 16-14 25a14 14 0 0028 0c0-9-14-25-14-25z" fill="#d62839"/><text x="142" y="278" font-family="Hind,sans-serif" font-size="15" font-weight="600" fill="#251a17">1.9 km</text></g>
+<g class="pin" style="--d:1.5s"><path d="M262 296c0 0-14 16-14 25a14 14 0 0028 0c0-9-14-25-14-25z" fill="#d62839"/><text x="284" y="328" font-family="Hind,sans-serif" font-size="15" font-weight="600" fill="#251a17">3.4 km</text></g></svg><div><h2 class="rv">A list you can actually rely on.</h2>
+<ul class="ck"><li class="rv"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#1d7a57"/><path d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Email confirmed</b><span>Every donor confirms their address before appearing.</span></div></li><li class="rv"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#1d7a57"/><path d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Certificate checked by a person</b><span>Each blood group certificate is reviewed before a profile goes live.</span></div></li><li class="rv"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#1d7a57"/><path d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Rest period built in</b><span>After a donation a donor is hidden for 90 days, then returns on their own.</span></div></li><li class="rv"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#1d7a57"/><path d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Nearest first</b><span>Results are sorted by distance from where you are.</span></div></li></ul></div></div></section>
+<section class="sec band"><div class="w"><h2 class="rv">Your blood group might be the one someone is searching for tonight.</h2><a class="btn ink rv" style="--d:.2s" href="donate.html">Register as a donor</a></div></section>
+<footer><div class="w"><div class="fg"><div><a class="logo" href="index.html" style="display:flex"><svg width="22" height="29" viewBox="0 0 22 29" aria-hidden="true"><path d="M11 1C11 1 1 12.5 1 19a10 10 0 0020 0C21 12.5 11 1 11 1z" fill="#d62839"/></svg>RaktSetu</a><p style="max-width:26em;margin:0">Verified blood donors, nearest first. Made so that no family has to depend on a forwarded message.</p></div>
+<div><a href="index.html">Home</a><a href="find.html">Find blood</a><a href="donate.html">Become a donor</a><a href="leaderboard.html">Top donors</a></div></div>
+<small>RaktSetu connects donors and families. It does not replace a blood bank. Always confirm blood group and fitness to donate at the hospital.</small></div></footer>
+<script>
+// 1) Paste your Google Apps Script web app URL here (see README).
+const API="https://script.google.com/macros/s/AKfycbw6CXXKzylhJ3wHJWTFXqCdf44i0ZkqYTBv82DxSsGcBF7sNH8rbQwKt9lqaNB4g42K/exec";
+const G=["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+const CAN={"O-":["O-"],"O+":["O+","O-"],"A-":["A-","O-"],"A+":["A+","A-","O+","O-"],"B-":["B-","O-"],"B+":["B+","B-","O+","O-"],"AB-":["AB-","A-","B-","O-"],"AB+":G};
+const $=i=>document.getElementById(i);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const q=p=>fetch(API+"?"+new URLSearchParams(p)).then(r=>r.json());
+const safe=async p=>{try{return await p}catch(e){return{error:"Could not reach the server. Please try again."}}};
+function wa(p){const d=p.replace(/\D/g,"");return p[0]==="+"?d:(d.length===10?"91"+d:(d.length===11&&d[0]==="0"?"91"+d.slice(1):d))}
+const post=b=>fetch(API,{method:"POST",body:JSON.stringify(b)}).then(r=>r.json());
+let need="O-";
+
+function tiles(){const t=$("tiles");t.innerHTML="";G.forEach(g=>{const b=el("button",0,g);b.type="button";b.setAttribute("aria-pressed",g===need);b.onclick=()=>{need=g;tiles()};t.appendChild(b)})}
+if($("g"))G.forEach(g=>{const o=el("option",0,g);o.value=g;$("g").appendChild(o)});
+if($("tiles"))tiles();
+
+let pos=null;
+function locate(){return new Promise(ok=>{if(!navigator.geolocation)return ok(null);navigator.geolocation.getCurrentPosition(p=>{pos={lat:p.coords.latitude,lng:p.coords.longitude};ok(pos)},()=>ok(null),{timeout:10000,maximumAge:300000})})}
+async function search(){
+  const r=$("res");r.innerHTML="";
+  if(false){r.appendChild(el("div","note","Connect the site to your Google Sheet first. See README.md."));return}
+  $("go").disabled=true;r.appendChild(el("div","note","Searching..."));
+  try{
+    const groups=$("compat").checked?CAN[need]:[need];
+    const L=pos||await locate();
+    const list=await q(Object.assign({action:"search",groups:groups.join(","),city:$("city").value.trim()},L?{lat:L.lat,lng:L.lng}:{}));
+    r.innerHTML="";
+    if(!Array.isArray(list)){r.appendChild(el("div","note",(list&&list.error)||"Something went wrong. Please try again."));return}
+    if(!list.length){r.appendChild(el("div","note","No available donors found for "+need+(groups.length>1?" or compatible groups":"")+". Try a wider area, or post the request in your community while you contact the nearest blood bank."));return}
+    if(!L){list.sort((a,b)=>(b.group===need)-(a.group===need)||b.n-a.n);r.appendChild(el("div","sm","Location is off, so distances are not shown. Allow location access in your browser to see the nearest donors first."))}
+    let k=0;list.forEach(d=>{
+      const row=el("div","row"),i=el("div");row.style.animationDelay=(k++*70)+"ms";
+      i.append(el("div","nm",d.name),el("div","sm",(d.km!=null?d.km+" km away - ":"")+[d.area,d.city].filter(Boolean).join(", ")+(d.n?" - "+d.n+" donation"+(d.n>1?"s":""):"")));
+      if(d.group===need)i.firstChild.appendChild(el("span","pill","Exact match"));
+      const act=el("div","act"),b=el("button","btn alt","Contact");
+      b.onclick=async()=>{b.disabled=true;const x=await safe(q({action:"contact",id:d.id}));act.innerHTML="";
+        if(x.phone){const raw=String(x.phone).replace(/^'/,""),ph=raw.replace(/[^\d+]/g,""),c=el("a","btn","Call "+raw);c.href="tel:"+ph;
+          const w=el("a","btn alt","WhatsApp");w.style.marginLeft="8px";w.target="_blank";w.rel="noopener";
+          w.href="https://wa.me/"+wa(ph)+"?text="+encodeURIComponent("Hello "+d.name+", I found you on RaktSetu. We urgently need "+need+" blood. Can you help?");act.append(c,w)}
+        else act.appendChild(el("span","sm",x.error||"Unavailable"))};
+      act.appendChild(b);row.append(el("div","grp",d.group),i,act);r.appendChild(row)});
+  }catch(e){r.innerHTML="";r.appendChild(el("div","note","Could not reach the server. Check your connection and try again."))}
+  finally{$("go").disabled=false}
+}
+if($("go")){$("go").onclick=search;$("city").addEventListener("keydown",e=>{if(e.key==="Enter")search()})}
+
+function rankList(id,items,fn,empty){const o=$(id);o.innerHTML="";if(!items.length){o.appendChild(el("li","sm",empty));return}items.forEach((x,i)=>{o.appendChild(fn(x,i))})}
+async function boards(){
+  if(false)return;
+  try{
+    rankList("lb",await q({action:"board"}),(d,i)=>{const l=el("li");const s=el("div");s.append(el("div","nm",d.name),el("div","sm",d.group+", "+d.city));l.append(el("span","rk",i+1),s,el("span","ct",d.n));return l},"No donations recorded yet. Be the first.");
+    rankList("fd",await q({action:"feed"}),d=>{const l=el("li");const s=el("div");s.append(el("div","nm",d.donor+" donated blood"),el("div","sm","For "+d.recipient+" on "+d.date));l.append(s);return l},"Nothing yet.");
+  }catch(e){}
+}
+if($("lb"))boards();
+
+function readFile(f){return new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok({name:f.name,type:f.type,data:r.result.split(",")[1]});r.onerror=no;r.readAsDataURL(f)})}
+function say(box,t,ok){box.className="msg "+(ok?"ok":"err");box.textContent=t}
+if($("reg")){
+let mine=null;
+async function detect(){const s=$("ls");s.textContent="Detecting your location...";const L=await locate();
+  if(!L){s.textContent="Could not get your location. Allow location access in your browser, or register without it. You will then be listed after nearer donors.";return}
+  mine={lat:Math.round(L.lat*1000)/1000,lng:Math.round(L.lng*1000)/1000};s.textContent="Location captured.";
+  try{const a=(await fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=14&lat="+L.lat+"&lon="+L.lng).then(r=>r.json())).address||{};
+    if(!$("c").value)$("c").value=a.city||a.town||a.village||a.state_district||"";if(!$("a").value)$("a").value=a.suburb||a.neighbourhood||""}catch(e){}}
+$("loc").onclick=detect;
+let asked=false;$("reg").addEventListener("focusin",()=>{if(!asked&&!mine){asked=true;detect()}});
+$("reg").addEventListener("submit",async ev=>{
+  ev.preventDefault();const m=$("rm"),f=$("f").files[0];
+  if(false)return say(m,"Connect the site to your Google Sheet first. See README.md.");
+  if(!f)return say(m,"Please attach your blood group certificate.");
+  if(f.size>3e6)return say(m,"The certificate file is larger than 3 MB. Please attach a smaller photo or PDF.");
+  $("sub").disabled=true;m.className="msg hide";
+  try{
+    const r=await post({action:"register",name:$("n").value.trim(),email:$("e").value.trim(),phone:$("p").value.trim(),group:$("g").value,city:$("c").value.trim(),area:$("a").value.trim(),lat:mine&&mine.lat,lng:mine&&mine.lng,cert:await readFile(f)});
+    if(r.ok){say(m,"Almost done. Check your email and tap the confirmation link. Your profile goes live after we verify your certificate.",1);$("reg").reset()}
+    else say(m,r.error||"Something went wrong. Please try again.");
+  }catch(e){say(m,"Could not reach the server. Please try again.")}
+  $("sub").disabled=false;
+});
+}
+
+// Donor management page: opened from the link in the confirmation email (?manage=TOKEN)
+const tok=new URLSearchParams(location.search).get("manage");
+if($("manage")&&tok)(async()=>{
+  const box=$("manage"),p=box.firstChild,d=await q({action:"me",token:tok});box.classList.remove("hide");
+  if(d.error){p.appendChild(el("h2",0,"This link is not valid"));return}
+  p.append(el("h2",0,"Hello, "+d.name),el("p","sm",d.live?"Your profile is live. Donations recorded: "+d.n+".":"Your profile is not live yet. It appears after email confirmation and certificate approval."));
+  const f=el("div","f");f.style.marginTop="12px";
+  const r=el("div");r.innerHTML='<label for="rc">Who did you donate for? (optional)</label><input id="rc" placeholder="Patient name or hospital">';
+  const b=el("button","btn","I donated blood today"),t=el("button","btn alt",d.available?"Pause my profile":"Make me available"),m=el("div","msg hide");
+  b.onclick=async()=>{b.disabled=true;const x=await safe(post({action:"donated",token:tok,recipient:r.querySelector("input").value.trim()}));say(m,x.ok?"Thank you. You are hidden from search for 90 days and will reappear automatically.":x.error,x.ok);b.disabled=!!x.ok};
+  t.onclick=async()=>{const x=await safe(post({action:"available",token:tok,value:t.textContent.startsWith("Make")}));say(m,x.ok?"Updated. Reload to see the change.":x.error,x.ok)};
+  const lb=el("button","btn alt","Update my location");
+  lb.onclick=async()=>{const L=await locate();if(!L)return say(m,"Could not get your location. Allow location access and try again.");
+    const x=await safe(post({action:"location",token:tok,lat:Math.round(L.lat*1000)/1000,lng:Math.round(L.lng*1000)/1000}));say(m,x.ok?"Location updated.":x.error,x.ok)};
+  f.append(r,b,t,lb);p.append(f,m);box.scrollIntoView();
+})();
+</script></body></html>
